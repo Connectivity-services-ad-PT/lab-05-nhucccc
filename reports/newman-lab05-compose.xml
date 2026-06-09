@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="FIT4110 Lab05 Docker Compose Verification" tests="15" time="0.291">
+  <testsuite name="01_Functional / GET /health returns 200" id="766dd2e8-6945-4656-bbe3-2c5807aaff5c" timestamp="2026-06-09T03:50:16.520Z" tests="2" failures="0" errors="0" time="0.088">
+    <testcase name="Status code is 200" time="0.088" classname="01FunctionalGetHealthReturns200"/>
+    <testcase name="Response has status ok" time="0.088" classname="01FunctionalGetHealthReturns200"/>
+  </testsuite>
+  <testsuite name="01_Functional / POST valid temperature reading returns 201" id="feabd4a0-409b-4f91-a4fd-c055bfede8c4" timestamp="2026-06-09T03:50:16.520Z" tests="2" failures="0" errors="0" time="0.041">
+    <testcase name="Status code is 201" time="0.041" classname="01FunctionalPostValidTemperatureReadingReturns201"/>
+    <testcase name="Response has reading_id and accepted" time="0.041" classname="01FunctionalPostValidTemperatureReadingReturns201"/>
+  </testsuite>
+  <testsuite name="01_Functional / GET /readings/latest returns items array" id="b59d5c1d-4013-443d-a982-06db1fcd0083" timestamp="2026-06-09T03:50:16.520Z" tests="2" failures="0" errors="0" time="0.031">
+    <testcase name="Status code is 200" time="0.031" classname="01FunctionalGetReadingsLatestReturnsItemsArray"/>
+    <testcase name="Response has items array" time="0.031" classname="01FunctionalGetReadingsLatestReturnsItemsArray"/>
+  </testsuite>
+  <testsuite name="01_Functional / GET /readings/{id} returns 200" id="53859782-39da-4ef8-b415-fbb289701d1b" timestamp="2026-06-09T03:50:16.520Z" tests="2" failures="0" errors="0" time="0.010">
+    <testcase name="Status code is 200" time="0.010" classname="01FunctionalGetReadingsIdReturns200"/>
+    <testcase name="reading_id matches" time="0.010" classname="01FunctionalGetReadingsIdReturns200"/>
+  </testsuite>
+  <testsuite name="02_Auth / POST reading without token returns 401" id="b607ec8b-4a78-48aa-809a-7076bbffeaf6" timestamp="2026-06-09T03:50:16.520Z" tests="2" failures="0" errors="0" time="0.010">
+    <testcase name="Missing token returns 401" time="0.010" classname="02AuthPostReadingWithoutTokenReturns401"/>
+    <testcase name="Error follows ProblemDetails" time="0.010" classname="02AuthPostReadingWithoutTokenReturns401"/>
+  </testsuite>
+  <testsuite name="02_Auth / POST reading with wrong token returns 401" id="d571e49b-6c4a-4626-a5f7-5a0c78778a00" timestamp="2026-06-09T03:50:16.520Z" tests="2" failures="0" errors="0" time="0.007">
+    <testcase name="Wrong token returns 401" time="0.007" classname="02AuthPostReadingWithWrongTokenReturns401"/>
+    <testcase name="Error follows ProblemDetails" time="0.007" classname="02AuthPostReadingWithWrongTokenReturns401"/>
+  </testsuite>
+  <testsuite name="03_Negative / POST missing device_id returns 422" id="09a37207-baa1-419d-8f93-d7cc38922808" timestamp="2026-06-09T03:50:16.520Z" tests="2" failures="0" errors="0" time="0.013">
+    <testcase name="Missing required field returns 422" time="0.013" classname="03NegativePostMissingDeviceIdReturns422"/>
+    <testcase name="Error follows ProblemDetails" time="0.013" classname="03NegativePostMissingDeviceIdReturns422"/>
+  </testsuite>
+  <testsuite name="03_Negative / POST value as string returns 422" id="a326d5b0-b105-4e76-982f-feb07eaace4a" timestamp="2026-06-09T03:50:16.520Z" tests="2" failures="0" errors="0" time="0.008">
+    <testcase name="Wrong type returns 422" time="0.008" classname="03NegativePostValueAsStringReturns422"/>
+    <testcase name="Error follows ProblemDetails" time="0.008" classname="03NegativePostValueAsStringReturns422"/>
+  </testsuite>
+  <testsuite name="03_Negative / GET non-existent reading returns 404" id="8bc642b4-d223-4470-a59f-80f52f8ecbfd" timestamp="2026-06-09T03:50:16.520Z" tests="2" failures="0" errors="0" time="0.010">
+    <testcase name="Non-existent reading returns 404" time="0.010" classname="03NegativeGetNonExistentReadingReturns404"/>
+    <testcase name="404 follows ProblemDetails" time="0.010" classname="03NegativeGetNonExistentReadingReturns404"/>
+  </testsuite>
+  <testsuite name="04_Boundary_Reliability / POST temperature 80 accepted with X-Warning" id="447fc9b1-3792-4cfb-a4ec-8557b644f5db" timestamp="2026-06-09T03:50:16.520Z" tests="2" failures="0" errors="0" time="0.009">
+    <testcase name="Boundary 80 returns 201" time="0.009" classname="04BoundaryReliabilityPostTemperature80AcceptedWithXWarning"/>
+    <testcase name="X-Warning header present" time="0.009" classname="04BoundaryReliabilityPostTemperature80AcceptedWithXWarning"/>
+  </testsuite>
+  <testsuite name="04_Boundary_Reliability / POST temperature 81 rejected" id="3d2d6d85-aacd-4960-849b-6f525a34330c" timestamp="2026-06-09T03:50:16.520Z" tests="2" failures="0" errors="0" time="0.005">
+    <testcase name="Above boundary 81 returns 422" time="0.005" classname="04BoundaryReliabilityPostTemperature81Rejected"/>
+    <testcase name="Error follows ProblemDetails" time="0.005" classname="04BoundaryReliabilityPostTemperature81Rejected"/>
+  </testsuite>
+  <testsuite name="04_Boundary_Reliability / POST temperature -40 lower boundary accepted" id="cc1683a1-f03d-435f-8599-cf053b1af2a4" timestamp="2026-06-09T03:50:16.520Z" tests="2" failures="0" errors="0" time="0.008">
+    <testcase name="Lower boundary -40 returns 201" time="0.008" classname="04BoundaryReliabilityPostTemperature40LowerBoundaryAccepted"/>
+    <testcase name="Reading accepted" time="0.008" classname="04BoundaryReliabilityPostTemperature40LowerBoundaryAccepted"/>
+  </testsuite>
+  <testsuite name="04_Boundary_Reliability / GET health under 1000ms" id="25881327-bbaf-4e90-b764-1aea6ad84e5e" timestamp="2026-06-09T03:50:16.520Z" tests="2" failures="0" errors="0" time="0.008">
+    <testcase name="Response time below 1000ms" time="0.008" classname="04BoundaryReliabilityGetHealthUnder1000Ms"/>
+    <testcase name="Health reachable" time="0.008" classname="04BoundaryReliabilityGetHealthUnder1000Ms"/>
+  </testsuite>
+  <testsuite name="05_AI_Service_Smoke / GET AI /health returns 200" id="5d1397aa-533f-4a24-8dff-f4558bbc3264" timestamp="2026-06-09T03:50:16.520Z" tests="2" failures="0" errors="0" time="0.029">
+    <testcase name="AI service health returns 200" time="0.029" classname="05AiServiceSmokeGetAiHealthReturns200"/>
+    <testcase name="AI service status ok" time="0.029" classname="05AiServiceSmokeGetAiHealthReturns200"/>
+  </testsuite>
+  <testsuite name="05_AI_Service_Smoke / POST AI /predict returns prediction" id="3a71ccf6-9f89-4a34-bcc7-4abf37879fc7" timestamp="2026-06-09T03:50:16.520Z" tests="2" failures="0" errors="0" time="0.014">
+    <testcase name="AI predict returns 200" time="0.014" classname="05AiServiceSmokePostAiPredictReturnsPrediction"/>
+    <testcase name="Prediction has objects and confidence" time="0.014" classname="05AiServiceSmokePostAiPredictReturnsPrediction"/>
+  </testsuite>
+</testsuites>

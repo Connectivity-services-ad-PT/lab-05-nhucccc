@@ -1,0 +1,37 @@
+﻿=== Docker Compose Evidence - Lab 05 ===
+Date: 2026-06-09 10:52:32
+Team: team-core (A6 - Core Business)
+
+=== docker compose ps ===
+NAME                IMAGE                COMMAND                  SERVICE      CREATED          STATUS                    PORTS
+fit4110-ai-lab05    python:3.11-slim     "sh -c 'pip install ΓÇª"   ai-service   11 minutes ago   Up 11 minutes (healthy)   0.0.0.0:9000->9000/tcp, [::]:9000->9000/tcp
+fit4110-api-lab05   lab-05-nhucccc-api   "sh -c 'uvicorn iot_ΓÇª"   api          11 minutes ago   Up 10 minutes (healthy)   0.0.0.0:8000->8000/tcp, [::]:8000->8000/tcp
+fit4110-db-lab05    postgres:15-alpine   "docker-entrypoint.sΓÇª"   db           11 minutes ago   Up 11 minutes (healthy)   5432/tcp
+
+
+=== GET /health (API port 8000) ===
+{"status":"ok","service":"iot-ingestion","version":"0.5.0"}
+
+=== GET /health (AI port 9000) ===
+{"status":"ok","service":"ai-service","version":"0.5.0"}
+
+=== DB readiness ===
+/var/run/postgresql:5432 - accepting connections
+
+=== Non-root user (API container) ===
+User: appuser
+
+=== Network ===
+lab-05-nhucccc_team-internal bridge
+
+=== Image tags ===
+fit4110/iot-ingestion:lab05
+fit4110/iot-ingestion:v0.1.0-team-core (lab05)
+
+=== Newman result summary ===
+15 requests | 30 assertions | 0 failures
+01_Functional:          4/4  pass
+02_Auth:                2/2  pass (401 ProblemDetails)
+03_Negative:            3/3  pass (422/404 ProblemDetails)
+04_Boundary_Reliability:4/4  pass (X-Warning, boundary +-40/80)
+05_AI_Service_Smoke:    2/2  pass (AI health + predict)
