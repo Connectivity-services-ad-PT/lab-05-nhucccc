@@ -112,3 +112,24 @@ make logs
 - Sử dụng `docker compose ps` để xem trạng thái container.
 - Nếu API trả lỗi kết nối DB, hãy kiểm tra biến môi trường `POSTGRES_*` trong `.env` và đảm bảo DB đã sẵn sàng (`pg_isready`).
 - Nếu AI service cần tải mô hình lớn, tăng `start_period` của healthcheck trong `docker-compose.yml`.
+
+---
+
+## 8. Tham gia mạng chung `class-net` (plug-a-thon)
+
+Theo yêu cầu Lab 05, service có thể tham gia mạng `class-net` khi kết nối với hệ sinh thái của lớp. Trong môi trường local và CI hiện tại, `class-net` chưa tồn tại nên đã bỏ để tránh lỗi. Khi tham gia plug-a-thon:
+
+```bash
+# Tạo network chung trước
+docker network create class-net
+
+# Thêm class-net vào docker-compose.yml:
+# networks:
+#   team-internal:
+#     driver: bridge
+#   class-net:
+#     external: true
+# (và thêm class-net vào networks của service api)
+
+docker compose up -d --build
+```
